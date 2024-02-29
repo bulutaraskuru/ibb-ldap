@@ -8,7 +8,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class CopyRoutesCommand extends Command
 {
-    protected $name = 'ibbldap:copy-routes';
+    protected $name = 'ibbldap:install';
     protected $description = 'Copies the IbbLdap routes, controllers, and helpers to the Laravel application';
 
     public function handle()
