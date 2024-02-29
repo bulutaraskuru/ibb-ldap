@@ -12,6 +12,7 @@
             "name": "Bulut KURU"
         }
     ],
+    "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
