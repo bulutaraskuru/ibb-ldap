@@ -12,9 +12,11 @@
             "name": "Bulut KURU"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require-dev": {
-        "orchestra/testbench": "^8.21"
+        "orchestra/testbench": "^8.21",
+        "phpunit/phpunit": "^9.5" // PHPUnit sürümünü projenizin uyumluluğuna göre ayarlayın.
     },
     "extra": {
         "laravel": {
@@ -22,5 +24,9 @@
                 "BulutKuru\\IbbLdap\\IbbLdapServiceProvider"
             ]
         }
+    },
+    "require": {
+        "php": "^7.3|^8.0", // PHP sürüm gereksinimini projenizin ihtiyaçlarına göre ayarlayın.
+        "laravel/framework": "^8.0|^9.0" // Laravel sürüm gereksinimini projenizin ihtiyaçlarına göre ayarlayın.
     }
 }
