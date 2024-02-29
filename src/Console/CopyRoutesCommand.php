@@ -12,7 +12,7 @@ class CopyRoutesCommand extends Command
 
     public function handle()
     {
-        $packageRoutesPath = __DIR__ . '/../../routes/web.php';
+        $packageRoutesPath = __DIR__ . '/../routes/web.php';
         $appRoutesPath = base_path('routes/web.php');
 
         if (file_exists($packageRoutesPath) && is_readable($packageRoutesPath)) {
