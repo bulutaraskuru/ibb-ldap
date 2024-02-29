@@ -1,15 +1,13 @@
-**PAKETİ KULLANMAK İÇİN GEREKLİ BİLGİLER**
-------------------------------------------
+## **PAKETİ KULLANMAK İÇİN GEREKLİ BİLGİLER**
 
-SITE\_URL= PROJE\_URL
+SITE_URL= PROJE_URL
 
-CLIENT\_ID= CLIENT\_ID
+CLIENT_ID= CLIENT_ID
 
-LDAP\_URL= LDAP\_URL TEST & PROD
+LDAP_URL= LDAP_URL TEST & PROD
 
-LDAP\_ROLE= LDAP ROLE
+LDAP_ROLE= LDAP ROLE
 
-**PAKET İÇİN CALISTIRILCAK KOMUTLAR**
--------------------------------------
+## **PAKET İÇİN CALISTIRILCAK KOMUTLAR**
 
-php artisan ibbldap:copy-routes
+php artisan ibbldap:install
