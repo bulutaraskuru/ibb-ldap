@@ -16,6 +16,7 @@ class CopyRoutesCommand extends Command
         $this->copyRoutes();
         $this->copyControllers();
         $this->copyHelpers();
+        $this->copyMigrations();
     }
 
     protected function copyRoutes()
@@ -62,6 +63,20 @@ class CopyRoutesCommand extends Command
         }
     }
 
+    protected function copyMigrations()
+    {
+        $packageMigrationsPath = __DIR__ . '/../database/migrations';
+        $appMigrationsPath = database_path('migrations');
+
+        $fileSystem = new Filesystem();
+        if ($fileSystem->isDirectory($packageMigrationsPath)) {
+            $fileSystem->copyDirectory($packageMigrationsPath, $appMigrationsPath);
+            $this->info("Successfully copied migrations to {$appMigrationsPath}");
+        } else {
+            $this->error("The package migrations directory does not exist or is not readable at {$packageMigrationsPath}");
+        }
+    }
+
     protected function appendToFile($filePath, $content)
     {
         if (file_exists($filePath) && is_writable($filePath)) {
@@ -74,7 +89,6 @@ class CopyRoutesCommand extends Command
             $this->error("The file {$filePath} is not writable.");
         }
     }
-
     protected function extractUseStatements($content)
     {
         preg_match_all('/^use\s+[a-zA-Z0-9\\\\_]+;/m', $content, $matches);

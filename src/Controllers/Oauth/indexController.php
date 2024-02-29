@@ -74,13 +74,13 @@ class indexController extends Controller
                 'name' => $profile['profile']['firstName'] . ' ' . $profile['profile']['lastName'],
                 'email' => $profile['profile']['email'] ?? null,
                 'phone' => $profile['profile']['phoneNumber'] ?? null,
-                'password' => Hash::make(CUSTOM_PASSWORD), // Consider using more secure & unique password handling
+                'password' => Hash::make(env('CUSTOM_PASSWORD')), // Consider using more secure & unique password handling
             ]
         );
 
         $user->assignRole('personal'); // Make sure 'personal' role exists
 
-        if ($user->is_active != ACTIVE) {
+        if ($user->is_active != 1) {
             return 'Bu uygulamaya giriş yetkiniz yoktur.';
         }
 
