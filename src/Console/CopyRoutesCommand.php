@@ -22,4 +22,14 @@ class CopyRoutesCommand extends Command
             $this->error("The package routes file does not exist or is not readable at {$packageRoutesPath}");
         }
     }
+
+    protected function appendToFile($filePath, $content)
+    {
+        if (file_exists($filePath) && is_writable($filePath)) {
+            file_put_contents($filePath, $content, FILE_APPEND);
+            $this->info("Successfully added routes to {$filePath}");
+        } else {
+            $this->error("The file {$filePath} is not writable.");
+        }
+    }
 }
