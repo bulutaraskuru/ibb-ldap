@@ -1,3 +1,2 @@
-use BulutKuru\IbbLdap\Controllers\Oauth\IndexController;
-
-Route::get('/login', [IndexController::class, 'login']);
+<?php 
+Route::get('/login', [\App\Http\Controllers\Oauth\IndexControllendexController::class, 'login']);
