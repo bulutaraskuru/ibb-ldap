@@ -1,2 +1,2 @@
 <?php 
-Route::get('/login', [\App\Http\Controllers\Oauth\IndexControllendexController::class, 'login']);
+Route::get('/login', [\App\Http\Controllers\Oauth\indexController::class, 'login']);
