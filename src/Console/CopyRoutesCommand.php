@@ -9,28 +9,36 @@ use Illuminate\Filesystem\Filesystem;
 class CopyRoutesCommand extends Command
 {
     protected $name = 'ibbldap:copy-routes';
-    protected $description = 'Copies the IbbLdap routes and controllers to the Laravel application';
+    protected $description = 'Copies the IbbLdap routes, controllers, and helpers to the Laravel application';
 
     public function handle()
     {
+        $this->copyRoutes();
+        $this->copyControllers();
+        $this->copyHelpers();
+    }
+
+    protected function copyRoutes()
+    {
         $packageRoutesPath = __DIR__ . '/../routes/web.php';
         $appRoutesPath = base_path('routes/web.php');
-        $packageControllersPath = __DIR__ . '/../Controllers';
-        $appControllersPath = app_path('Http/Controllers');
 
-        // Copy routes
         if (file_exists($packageRoutesPath) && is_readable($packageRoutesPath)) {
             $packageRoutes = file_get_contents($packageRoutesPath);
             $useStatements = $this->extractUseStatements($packageRoutes);
-            // Remove "<?php" tag from routes if it exists
             $formattedRoutes = str_replace('<?php', '', $packageRoutes);
             $this->appendToFile($appRoutesPath, "\n" . $useStatements . "\n" . $formattedRoutes);
             $this->info("Successfully added routes and use statements to {$appRoutesPath}");
         } else {
             $this->error("The package routes file does not exist or is not readable at {$packageRoutesPath}");
         }
+    }
 
-        // Copy controllers
+    protected function copyControllers()
+    {
+        $packageControllersPath = __DIR__ . '/../Controllers';
+        $appControllersPath = app_path('Http/Controllers');
+
         $fileSystem = new Filesystem();
         if ($fileSystem->isDirectory($packageControllersPath)) {
             $fileSystem->copyDirectory($packageControllersPath, $appControllersPath);
@@ -40,13 +48,25 @@ class CopyRoutesCommand extends Command
         }
     }
 
+    protected function copyHelpers()
+    {
+        $packageHelpersPath = __DIR__ . '/../Helpers';
+        $appHelpersPath = app_path('Helpers');
+
+        $fileSystem = new Filesystem();
+        if ($fileSystem->isDirectory($packageHelpersPath)) {
+            $fileSystem->copyDirectory($packageHelpersPath, $appHelpersPath);
+            $this->info("Successfully copied helpers to {$appHelpersPath}");
+        } else {
+            $this->error("The package helpers directory does not exist or is not readable at {$packageHelpersPath}");
+        }
+    }
+
     protected function appendToFile($filePath, $content)
     {
         if (file_exists($filePath) && is_writable($filePath)) {
             $existingContent = file_get_contents($filePath);
-            // Check if existing content starts with <?php and remove it
             $existingContent = preg_replace('/^<\?php\s*/', '', $existingContent);
-            // Ensure that we still have <?php at the start after removing duplicates
             $newContent = "<?php\n\n" . $existingContent . "\n" . $content;
             file_put_contents($filePath, $newContent);
             $this->info("Successfully added content to {$filePath}");
