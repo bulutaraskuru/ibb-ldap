@@ -87,7 +87,7 @@ class indexController extends Controller
         Auth::loginUsingId($user->id);
 
         $user->update([
-            'last_seend' => Carbon::now()->toDateTimeString(),
+            'last_seen' => Carbon::now()->toDateTimeString(),
         ]);
 
         return redirect()->route('admin.index');
