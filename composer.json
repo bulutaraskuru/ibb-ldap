@@ -1,0 +1,26 @@
+{
+    "name": "bulutkuru/ibb-ldap",
+    "description": "ibb ldap paketi",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "BulutKuru\\IbbLdap\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bulut KURU"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "orchestra/testbench": "^8.21"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BulutKuru\\IbbLdap\\IbbLdapServiceProvider"
+            ]
+        }
+    }
+}
