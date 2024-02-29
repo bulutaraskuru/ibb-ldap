@@ -24,6 +24,8 @@ class IbbLdapServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Burada paketinizin bağımlılıklarını kaydedebilirsiniz.
+        if ($this->app->runningInConsole()) {
+            $this->commands([\BulutKuru\IbbLdap\Console\CopyRoutesCommand::class]);
+        }
     }
 }
