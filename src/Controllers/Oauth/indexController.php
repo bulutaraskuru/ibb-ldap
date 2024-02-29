@@ -1,6 +1,6 @@
 <?php
 
-namespace BulutKuru\IbbLdap\Controllers\Oauth;
+namespace App\Http\Controllers\Oauth;
 
 use App\Http\Controllers\Controller;
 use App\Helpers\bHelper;
